@@ -1,16 +1,27 @@
 #!/bin/bash
 file="/home/${USER}/.safedockerdown/safedockerdown.sh"
 maninthemiddle="/home/${USER}/.safedockerdown/maninthemiddle.sh"
+uninstall=/home/${USER}/.safedockerdown/uninstall.sh
 
 if [ ! -f $file ]; then
 	echo -n "You did started the script the first time. Do you want me to set it up for you? ? (Yes/no): "
-	read input1
-	input1=${input1:-yes}
-	firstlettercheck=${input1:0:1}
-	if [ ${firstlettercheck^} == "Y" ]; then
-		echo alias docker-compose=\"${maninthemiddle}\" >> /home/${USER}/.zshrc
-		mkdir /home/${USER}/.safedockerdown && cp ./maninthemiddle.sh ${maninthemiddle} && cp ./safedockerdown.sh ${file} && rm -rf ../safedockerdown
-		echo "Done. Now simly use 'docker-compose down' and I ll protect you abusing it :) "
+	read firstStart
+	firstStart=${firstStart:-yes}
+	firstStartlettercheck=${firstStart:0:1}
+
+	if [ ${firstStartlettercheck^} == "Y" ]; then
+		echo -n "Are u using zsh? (Yes/no): "
+		read zshrc
+		zshrc=${zshrc:-yes}
+		zshrclettercheck=${firstStart:0:1}
+		if [ ${zshrclettercheck^} ==  'Y' ]; then
+			echo alias docker-compose=\"${maninthemiddle}\" >> /home/${USER}/.zshrc
+		else
+			echo alias docker-compose=\"${maninthemiddle}\" >> /home/${USER}/.bashrc
+		fi
+
+		mkdir /home/${USER}/.safedockerdown && cp ./maninthemiddle.sh ${maninthemiddle} && cp ./safedockerdown.sh ${file} && cp ./uninstall.sh ${uninstall} && rm -rf ../safedockerdown
+		echo "Done. Now simply use 'docker-compose down' and I ll protect you abusing it :) "
 		zsh
 		exit
 	fi
