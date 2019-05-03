@@ -1,6 +1,6 @@
 # safedockerdown
 
 # Usage
- - run safedocker.sh
+ - run safedockerdown.sh
  - follow the script
  - enjoy
