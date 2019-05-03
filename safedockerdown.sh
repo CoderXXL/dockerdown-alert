@@ -18,10 +18,21 @@ fi
 
 echo -n "Are u sure? (yes/No): "
 read input2
-input2=${input2:-no}
+input2=${input2:-null}
+
 
 if [ ${input2^} == "No" ]; then
 	echo "You're welcome"
-else
+	exit
+fi
+
+if [ ${input2^} == "Y" ]; then
+	echo "Write out \"yes\""
+	exit
+fi
+
+if [ ${input2^} == "Yes" ]; then
 	exec docker-compose down
+else
+	echo "Abort."
 fi
