@@ -9,7 +9,7 @@ if [ ! -f $file ]; then
 
 	if [ ${input1^} == "Yes" ]; then
 		echo alias docker-compose=\"${maninthemiddle}\" >> /home/${USER}/.zshrc
-		mkdir /home/${USER}/.safedockerdown && cp ./maninthemiddle.sh ${maninthemiddle} && cp ./safedockerdown.sh ${file}
+		mkdir /home/${USER}/.safedockerdown && cp ./maninthemiddle.sh ${maninthemiddle} && cp ./safedockerdown.sh ${file} && rm -rf ../safedockerdown
 		echo "Done. You can delete this folder and now simly use 'docker-compose down' and I ll protect you abusing it :) "
 		zsh
 		exit
