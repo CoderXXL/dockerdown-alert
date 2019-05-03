@@ -6,14 +6,15 @@ if [ ! -f $file ]; then
 	echo -n "You did started the script the first time. Do you want me to set it up for you? ? (Yes/no): "
 	read input1
 	input1=${input1:-yes}
-
-	if [ ${input1^} == "Yes" ]; then
+	firstlettercheck=${input1:0:1}
+	if [ ${firstlettercheck^} == "Y" ]; then
 		echo alias docker-compose=\"${maninthemiddle}\" >> /home/${USER}/.zshrc
 		mkdir /home/${USER}/.safedockerdown && cp ./maninthemiddle.sh ${maninthemiddle} && cp ./safedockerdown.sh ${file} && rm -rf ../safedockerdown
 		echo "Done. Now simly use 'docker-compose down' and I ll protect you abusing it :) "
 		zsh
 		exit
 	fi
+	exit
 fi
 
 echo -n "Are u sure? (yes/No): "
